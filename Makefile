@@ -1,12 +1,9 @@
-.PHONY: all check build test clean ci help count
-count:
-	@wc -w $(OUTPUTS)
 SRC_DIR := src
 OUT_DIR := out
 SOURCES := $(wildcard $(SRC_DIR)/*.txt)
 OUTPUTS := $(patsubst $(SRC_DIR)/%.txt,$(OUT_DIR)/%.txt,$(SOURCES))
 
-.PHONY: all check build test clean ci help
+.PHONY: all check build test clean ci help count
 
 all: test
 
@@ -37,3 +34,7 @@ clean:
 	rm -rf $(OUT_DIR)
 
 ci: clean check test
+
+count: build  ## report source files and built words
+	@ls -1 $(SRC_DIR)/*.txt | wc -l
+	@wc -w $(OUTPUTS) | tail -1
