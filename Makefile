@@ -1,13 +1,6 @@
-.PHONY: all clean
-
-all: out/greeting.txt
-
-out/greeting.txt: src/greeting.txt
-	mkdir -p out
-	tr '[:lower:]' '[:upper:]' < src/greeting.txt > out/greeting.txt
-
-clean:
-	rm -rf out
+.PHONY: count
+count: build 
+	@wc -w $(OUTPUTS) | tail -1
 SRC_DIR := src
 OUT_DIR := out
 SOURCES := $(wildcard $(SRC_DIR)/*.txt)
